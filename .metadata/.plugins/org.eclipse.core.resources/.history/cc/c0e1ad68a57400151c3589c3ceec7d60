@@ -1,0 +1,37 @@
+package Thread_Pool;
+import java.math.BigDecimal;
+
+public class Worker extends Thread{
+	private int start;
+	private int stop;
+	private BigDecimal result = new BigDecimal(0);
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getStop() {
+		return stop;
+	}
+	public void setStop(int stop) {
+		this.stop = stop;
+	}
+	public BigDecimal getResult() {
+		return result;
+	}
+	
+	public void setResult(BigDecimal result) {
+		this.result = result;
+	}
+	public void run(){
+		for(int n = start; n <= stop; n++)
+		{
+			BigDecimal temp = new BigDecimal(Math.pow(-1, n));
+			temp.divide(new BigDecimal(2*n+1), BigDecimal.ROUND_FLOOR);
+			result.add(temp);
+		}
+	}
+	
+}

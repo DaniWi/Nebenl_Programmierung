@@ -1,0 +1,16 @@
+package Thread_Pool;
+
+public class Master {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		Worker wor = new Worker();
+		wor.setStart(0);
+		wor.setStop(3);
+		wor.start();
+		wor.join();
+		System.out.println(wor.getResult());
+		System.out.println(0%2);
+	}
+
+}

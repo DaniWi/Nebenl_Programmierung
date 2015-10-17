@@ -1,0 +1,24 @@
+package Thread_Pool;
+
+public class Worker {
+	private int start;
+	private int stop;
+	private int result;
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getStop() {
+		return stop;
+	}
+	public void setStop(int stop) {
+		this.stop = stop;
+	}
+	public int getResult() {
+		return result;
+	}
+	
+}

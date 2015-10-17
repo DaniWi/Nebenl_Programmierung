@@ -1,0 +1,21 @@
+package Thread_Pool;
+import java.math.BigDecimal;
+import java.util.Scanner;
+
+public class Master {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.out.println("How many threads do you like?");
+		Scanner scanner = new Scanner(System.in);
+		int threads = scanner.nextInt();
+		
+		BigDecimal pi = new BigDecimal(Math.PI);
+		Worker[threads] wor = new Worker[threads]();
+		wor.setStart(0);
+		wor.setStop(3);
+		wor.start();
+		wor.join();
+		System.out.println(wor.getResult());
+	}
+
+}
