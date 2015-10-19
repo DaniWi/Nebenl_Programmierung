@@ -30,12 +30,16 @@ public class Worker extends Thread{
 		for(int n = start; n <= stop; n++)
 		{
 			BigDecimal dividend;
+			//check if odd or even
 			if(n%2 == 0)
 				dividend = new BigDecimal("1.0", MathContext.DECIMAL128);
 			else
 				dividend = new BigDecimal("-1.0", MathContext.DECIMAL128);
-			Integer divisor = 2*n+1;			
+			//calculate divisor
+			Integer divisor = 2*n+1;		
+			//divide
 			BigDecimal res = dividend.divide(new BigDecimal(divisor.toString()), MathContext.DECIMAL128);
+			//add to result
 			result = result.add(res);
 		}
 	}
