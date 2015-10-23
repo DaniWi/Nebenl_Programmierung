@@ -1,7 +1,5 @@
 package Thread_Status;
 
-import jdk.management.resource.NotifyingMeter;
-
 public class Thread_Report {
 
 	public static void main(String[] args) {
