@@ -1,7 +1,5 @@
 package Thread_Status;
 
-import jdk.management.resource.NotifyingMeter;
-
 public class Thread_Report {
 
 	public static void main(String[] args) {
@@ -59,9 +57,10 @@ public class Thread_Report {
 		blockingThread.start();
 
 		// wait 20 seconds
-		try{
+		try {
 			Thread.sleep(20000);
-		} catch (InterruptedException e){
+		}
+		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -90,7 +89,8 @@ public class Thread_Report {
 			moni_thread.join();
 			System.out.println("\n");
 			System.out.println("Monitor Thread returned");
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
