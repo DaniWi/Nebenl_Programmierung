@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;messagePassing&apos; in &apos;message_passing.Process&apos; to &apos;messageCond&apos;&#x0D;&#x0A;- Original project: &apos;Uebungsblatt2&apos;&#x0D;&#x0A;- Original element: &apos;message_passing.Process.messagePassing&apos;&#x0D;&#x0A;- Renamed element: &apos;message_passing.Process.messageCond&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;messagePassing&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;message_passing{ex2.java[Process^messagePassing" name="messageCond" references="true" setter="false" stamp="1447431539927" textual="false" version="1.0"/>
+</session>
