@@ -14,7 +14,7 @@ public class Producer implements Runnable {
 	public void run() {
 		int randomNumber;
 		do {
-			randomNumber = (int) (11 * Math.random());
+			randomNumber = (int) (101 * Math.random());
 			System.out.println(name + ": I made " + randomNumber);
 			buffer.produce(randomNumber);
 			Main.signal();
