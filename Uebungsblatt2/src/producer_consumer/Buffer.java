@@ -5,7 +5,7 @@ public class Buffer {
 	private int[] buffer = new int[size];
 	private int produceIndex = 0;
 	private int consumeIndex = 0;
-	private volatile boolean empty = true;
+	private boolean empty = true;
 	private final int enlargeSize = 10;
 	private String name;
 
