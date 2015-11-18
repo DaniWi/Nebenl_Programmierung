@@ -86,7 +86,6 @@ class Process extends Thread {
 		} finally {
 			messageLock.unlock();
 		}
-
 		return receive[i].message;
 	}
 
@@ -133,7 +132,7 @@ class Process extends Thread {
 		for (int i = 0; i < p.length; i++) {
 			if (i != pid) {
 				try {
-					p[i].sendMessage("hello p" + i + ", this is p" + pid, pid,i);
+					p[i].sendMessage("hello p" + i + ", this is p" + pid, pid, i);
 				} catch (Exception e) {
 					System.err.println("send exception:");
 				}
