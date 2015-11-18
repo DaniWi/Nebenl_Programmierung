@@ -26,12 +26,16 @@ public class LazyInitRace {
 
 class ExpensiveObject { 
 	
-	//counter for constructor call
+	// counter for constructor call
 	private static int count = 0;
-	
-	public ExpensiveObject(){
+	private static int wait = 4;
+
+	public ExpensiveObject() {
 		try {
-			Thread.sleep(++count*5000);
+			Thread.sleep(wait-- * 5000);
+			synchronized (this) {
+				++count;
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
