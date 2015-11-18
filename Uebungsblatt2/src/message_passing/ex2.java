@@ -86,9 +86,6 @@ class Process extends Thread {
 		} finally {
 			messageLock.unlock();
 		}
-		while(receive[i].message == null){
-			yield();
-		}
 		return receive[i].message;
 	}
 
