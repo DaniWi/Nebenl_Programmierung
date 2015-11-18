@@ -61,14 +61,14 @@ class Process extends Thread {
 
 	// called by sender
 	// --------------------------------------------------------------------
-	public void sendMessage(String m, int pid) { 
-		//p[pid].messageLock.lock();
-		//try{
+	public void sendMessage(String m, int pid, int i) { 
+		p[i].messageLock.lock();
+		try{
 			receive[pid].message = m;
-		/*	p[pid].messageCond.signal();
+			p[i].messageCond.signal();
 		} finally {
-			p[pid].messageLock.unlock();
-		}*/
+			p[i].messageLock.unlock();
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -76,7 +76,7 @@ class Process extends Thread {
 	// called by a process to receive a message from another process
 	// --------------------------------------------------------------------
 	public String receiveMessage(int i) { /* TODO */
-		/*messageLock.lock();
+		messageLock.lock();
 		try{
 			while(receive[i].message == null){
 				messageCond.await();
@@ -85,7 +85,7 @@ class Process extends Thread {
 			System.err.println(e);
 		} finally {
 			messageLock.unlock();
-		}*/
+		}
 		while(receive[i].message == null){
 			yield();
 		}
@@ -135,7 +135,7 @@ class Process extends Thread {
 		for (int i = 0; i < p.length; i++) {
 			if (i != pid) {
 				try {
-					p[i].sendMessage("hello p" + i + ", this is p" + pid, pid);
+					p[i].sendMessage("hello p" + i + ", this is p" + pid, pid, i);
 				} catch (Exception e) {
 					System.err.println("send exception:");
 				}

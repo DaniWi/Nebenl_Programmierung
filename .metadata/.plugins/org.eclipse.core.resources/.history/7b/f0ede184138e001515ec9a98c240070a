@@ -2,6 +2,9 @@ package message_passing;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 // S.Ostermann
 
@@ -21,6 +24,10 @@ class Process extends Thread {
 	int pid; // process id
 	Process[] p; // references to all other processes
 	Receive[] receive; // the receive objects
+	Lock messageLock;
+	Condition messageCond;
+	boolean finishedReference = false;
+	boolean startOne = false;
 
 	Process(int pid, int n) {
 		this.pid = pid;
@@ -28,6 +35,8 @@ class Process extends Thread {
 			this.p = new Process[n];
 			this.p[0] = this;
 		}
+		messageLock = new ReentrantLock();
+		messageCond = messageLock.newCondition();
 		receive = new Receive[n];
 		for (int i = 0; i < n; i++)
 			receive[i] = new Receive();
@@ -38,6 +47,7 @@ class Process extends Thread {
 	public synchronized void neighbours(Process[] p) {
 		// --------------------------------------------------------------------
 		this.p = p;
+		this.finishedReference = true;
 		this.notify();
 	}
 
@@ -51,26 +61,33 @@ class Process extends Thread {
 
 	// called by sender
 	// --------------------------------------------------------------------
-	public synchronized void sendMessage(String m, int pid) { 
-		this.receive[pid].message = m;
-		synchronized(p[pid]){
-			p[pid].notify();
-		}
+	public void sendMessage(String m, int pid) { 
+		//p[pid].messageLock.lock();
+		//try{
+			receive[pid].message = m;
+		/*	p[pid].messageCond.signal();
+		} finally {
+			p[pid].messageLock.unlock();
+		}*/
 	}
 
 	// --------------------------------------------------------------------
 
 	// called by a process to receive a message from another process
 	// --------------------------------------------------------------------
-	public synchronized String receiveMessage(int i) { /* TODO */
-		while(receive[i].message == null) {
-			try {
-				System.out.println("wait");
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public String receiveMessage(int i) { /* TODO */
+		/*messageLock.lock();
+		try{
+			while(receive[i].message == null){
+				messageCond.await();
 			}
+		} catch(Exception e) {
+			System.err.println(e);
+		} finally {
+			messageLock.unlock();
+		}*/
+		while(receive[i].message == null){
+			yield();
 		}
 		return receive[i].message;
 	}
@@ -82,16 +99,17 @@ class Process extends Thread {
 	public void run() {
 		// --------------------------------------------------------------------
 		String m;
-		System.out.println(this.pid);
 		if (pid == 0) {
-			// wait till all processes are created: TODO change to a better
-			// mechanism!
-			try {
-				Thread.sleep(3000);
-			} catch (Exception e) {
-			}
-
 			// p0 sends the reference vector to the others
+			synchronized (this) {
+				try {
+					while(!startOne){
+						this.wait();
+					}
+				} catch (InterruptedException e) {
+				}
+			}
+			
 			p[pid] = (Process) this;
 			for (int i = 1; i < p.length; i++) {
 				try {
@@ -105,7 +123,9 @@ class Process extends Thread {
 			// wait until they got the reference vector
 			synchronized (this) {
 				try {
-					this.wait();
+					while(!finishedReference){
+						this.wait();
+					}
 				} catch (InterruptedException e) {
 				}
 			}
@@ -149,6 +169,10 @@ class Process extends Thread {
 			Process temp = new Process(i, n);
 			one.register(temp, i);
 			temp.start();
+		}
+		synchronized(one){
+			one.startOne = true;
+			one.notify();
 		}
 
 	}
