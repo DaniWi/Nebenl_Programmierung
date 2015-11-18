@@ -23,7 +23,7 @@ class Process extends Thread {
 
 	int pid; // process id
 	Process[] p; // references to all other processes
-	Receive[] receive; // the receive objects
+	volatile Receive[] receive; // the receive objects
 	Lock messageLock;
 	Condition messageCond;
 	boolean finishedReference = false;
@@ -61,13 +61,13 @@ class Process extends Thread {
 
 	// called by sender
 	// --------------------------------------------------------------------
-	public void sendMessage(String m, int pid, int i) { 
-		p[i].messageLock.lock();
+	public void sendMessage(String m, int pid) { 
+		p[this.pid].messageLock.lock();
 		try{
 			receive[pid].message = m;
-			p[i].messageCond.signal();
+			p[this.pid].messageCond.signal();
 		} finally {
-			p[i].messageLock.unlock();
+			p[this.pid].messageLock.unlock();
 		}
 	}
 
@@ -132,7 +132,7 @@ class Process extends Thread {
 		for (int i = 0; i < p.length; i++) {
 			if (i != pid) {
 				try {
-					p[i].sendMessage("hello p" + i + ", this is p" + pid, pid, i);
+					p[i].sendMessage("hello p" + i + ", this is p" + pid, pid);
 				} catch (Exception e) {
 					System.err.println("send exception:");
 				}
