@@ -6,4 +6,6 @@
 <fullyQualifiedTypeName name="java.util.concurrent.locks.Lock"/>
 <fullyQualifiedTypeName name="java.util.concurrent.locks.ReentrantLock"/>
 <fullyQualifiedTypeName name="java.util.concurrent.locks.Condition"/>
+<fullyQualifiedTypeName name="java.lang.Thread.State"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>
