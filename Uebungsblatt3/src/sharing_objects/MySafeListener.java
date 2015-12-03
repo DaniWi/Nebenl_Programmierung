@@ -1,21 +1,30 @@
 package sharing_objects;
 
-public class MySafeListener {
+public class MySafeListener extends Thread {
 	
 	private final EventListener listener;
+	private static int ID = 1;
+	private final int threadID;
 	
 	private MySafeListener() {
+		threadID = ID++;
 		listener = new EventListener() {
 			public void onEvent(ImmutableEvent e) {
-				System.out.println(e.toString());
+				onEventMethod(e);
 			}
 		};
 	}
 	
-	public static MySafeListener newInstance(EventGeneratorThread source) {
+	public static MySafeListener newInstance(EventGeneratorThread... generators) {
 		MySafeListener safe = new MySafeListener();
-		source.registerListener(safe.listener);
 		return safe;
 	}
-
+	
+	private void onEventMethod(ImmutableEvent e) {
+		System.out.println("Listener" + threadID + ": " + e.toString());
+	}
+	
+	public void registerMyListener(EventGeneratorThread source) {
+		source.registerListener(listener);
+	}
 }
