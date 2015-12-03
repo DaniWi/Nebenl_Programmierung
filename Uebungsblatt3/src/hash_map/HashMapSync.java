@@ -21,11 +21,11 @@ public class HashMapSync {
 	}
 	
 	//contains element?
-	public boolean containsKey(int key){
+	public synchronized boolean containsKey(int key){
 		return map.containsKey(key);
 	}
 	
-	public int getMapSize(){
+	public synchronized int getMapSize(){
 		return map.size();
 	}
 		
