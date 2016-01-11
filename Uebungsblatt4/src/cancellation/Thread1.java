@@ -4,7 +4,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Thread1 creates numbers between 0-41 and sends this values via the message queue to another thread.
- * The thread must be terminated with the terminate-method.
+ * The thread must be terminated with the terminate-method. When the thread will be terminated, the last message in the queue is
+ * the poison pill (-1) for the next thread.
  * @author Witsch Daniel
  *
  */

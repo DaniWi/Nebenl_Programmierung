@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Thread2 takes the values from receiving message queue and sends only the even numbers to the next thread with the sending message queue.
- * Thread2 is terminated with the poison pill (-1) in the receiving message queue.
+ * Thread2 will be terminated with the poison pill (-1) in the receiving message queue.
  * @author Witsch Daniel
  *
  */
