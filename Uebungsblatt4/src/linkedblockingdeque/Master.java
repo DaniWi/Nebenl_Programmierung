@@ -12,9 +12,9 @@ public class Master {
 		LinkedBlockingDeque<Job> deque3 = new LinkedBlockingDeque<Job>();
 
 		//create centres
-		ComputingCentre centre1 = new ComputingCentre(100, deque1, 1);
-		ComputingCentre centre2 = new ComputingCentre(100, deque2, 2);
-		ComputingCentre centre3 = new ComputingCentre(100, deque3, 3);
+		ComputingCentre centre1 = new ComputingCentre(500, deque1, 1);
+		ComputingCentre centre2 = new ComputingCentre(80, deque2, 2);
+		ComputingCentre centre3 = new ComputingCentre(20, deque3, 3);
 
 		//set other deques		
 		centre1.setDeque2(deque2);
