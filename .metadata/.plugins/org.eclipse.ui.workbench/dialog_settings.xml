@@ -30,6 +30,7 @@
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID"/>
 		<item value="true" key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\Home\Desktop\Daniel\Studium\5.Semester\Nebenläufige Programmierung\Proseminar\4_Abgabe\4_Abgabe_Witsch.zip"/>
 			<item value="C:\Users\Home\Desktop\Daniel\Studium\5.Semester\Nebenläufige Programmierung\Proseminar\2_Abgabe\2_Abgabe_witsch.zip"/>
 		</list>
 	</section>
