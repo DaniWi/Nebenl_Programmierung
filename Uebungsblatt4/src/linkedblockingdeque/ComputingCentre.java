@@ -83,10 +83,10 @@ public class ComputingCentre implements Runnable {
 				}else if(d2 != null && d3 != null){
 					//d2 has the better price
 					if(d2.getPrice() < d3.getPrice()){
-						job = deque2.peekFirst();
+						job = deque2.pollFirst();
 					//d3 has the better price
 					}else{
-						job = deque3.peekFirst();
+						job = deque3.pollFirst();
 					}
 					
 				}
